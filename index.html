@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shivu AI Pro - Coding & Game Engine</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-[#0f1117] text-white font-sans flex flex-col justify-between h-screen m-0">
+
+    <!-- Top Navbar -->
+    <header class="bg-[#161b22] border-b border-zinc-800 px-6 py-4 flex justify-between items-center sticky top-0 z-50">
+        <div class="flex items-center gap-3">
+            <span class="bg-purple-600 text-white font-black px-2.5 py-1 rounded-lg text-xs shadow-lg">⚡ AI</span>
+            <h1 class="text-lg font-black tracking-wider text-purple-400">SHIVU AI <span class="text-xs text-zinc-400 font-normal">PRO v1.0</span></h1>
+        </div>
+        <div class="flex gap-2 text-xs font-bold">
+            <span class="bg-zinc-800 text-zinc-300 px-3 py-1.5 rounded border border-zinc-700">Coding Mode</span>
+            <span class="bg-zinc-800 text-zinc-300 px-3 py-1.5 rounded border border-zinc-700">Game Engine</span>
+        </div>
+    </header>
+
+    <!-- Chat Conversation Area -->
+    <div id="chat-container" class="max-w-4xl w-full mx-auto px-4 py-6 flex-grow flex flex-col gap-4 overflow-y-auto">
+        <div class="flex justify-start">
+            <div class="bg-[#1f242d] border border-zinc-700 text-zinc-200 p-4 rounded-2xl rounded-bl-none text-xs sm:text-sm leading-relaxed shadow-md font-mono whitespace-pre-wrap">
+Yo! Main Shivu AI hoon. Mujhe Kimi AI ki tarah code likhne, game banane, aur debug karne ke liye banaya gaya hai. Batao aaj kya build karna hai?</div>
+        </div>
+    </div>
+
+    <!-- Bottom Input Box -->
+    <div class="bg-[#161b22] border-t border-zinc-800 p-4 sticky bottom-0">
+        <div class="max-w-4xl mx-auto flex gap-2">
+            <input 
+                type="text" 
+                id="user-input"
+                placeholder="Ask Shivu AI to write code, build games, or explain logic..." 
+                class="flex-grow bg-[#0d1117] border border-zinc-700 text-xs sm:text-sm px-4 py-3 rounded-xl text-white focus:outline-none focus:border-purple-500 shadow-inner"
+            />
+            <button 
+                onclick="sendMessage()"
+                class="bg-purple-600 hover:bg-purple-500 text-white font-extrabold text-xs sm:text-sm px-6 py-3 rounded-xl transition shadow-lg cursor-pointer"
+            >
+                Send 🚀
+            </button>
+        </div>
+    </div>
+
+    <script>
+        function sendMessage() {
+            const inputField = document.getElementById('user-input');
+            const chatContainer = document.getElementById('chat-container');
+            const text = inputField.value.trim();
+
+            if (!text) return;
+
+            // User Message
+            chatContainer.innerHTML += `
+                <div class="flex justify-end">
+                    <div class="max-w-[85%] bg-purple-600 text-white p-4 rounded-2xl rounded-br-none text-xs sm:text-sm font-medium shadow-md">
+                        ${text}
+                    </div>
+                </div>
+            `;
+            inputField.value = '';
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+
+            // AI Loading Simulation
+            setTimeout(() => {
+                let aiReply = `Tune pucha: "${text}". Shivu AI isko process karke next update mein aur advanced kar raha hai!`;
+                if (text.toLowerCase().includes('game') || text.toLowerCase().includes('coding') || text.toLowerCase().includes('code')) {
+                    aiReply = "🔥 Game Development / Coding Mode Activated! Yeh le tera clean code snippet:\n\n```tsx\n// Shivu AI Generated Code\nexport default function GameCanvas() {\n  return <div className='bg-black text-green-400 p-4'>Game Engine Running...</div>;\n}\n```";
+                }
+
+                chatContainer.innerHTML += `
+                    <div class="flex justify-start">
+                        <div class="max-w-[85%] bg-[#1f242d] border border-zinc-700 text-zinc-200 p-4 rounded-2xl rounded-bl-none text-xs sm:text-sm leading-relaxed shadow-md font-mono whitespace-pre-wrap">
+                            ${aiReply}
+                        </div>
+                    </div>
+                `;
+                chatContainer.scrollTop = chatContainer.scrollHeight;
+            }, 1000);
+        }
+
+        document.getElementById('user-input').addEventListener('keypress', function (e) {
+            if (e.key === 'Enter') {
+                sendMessage();
+            }
+        });
+    </script>
+</body>
+</html>
+
